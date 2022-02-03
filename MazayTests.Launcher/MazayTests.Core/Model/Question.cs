@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MazayTests.Core.Model
 {
-    class Question
+    public class Question
     {
     }
 }
