@@ -8,6 +8,6 @@ namespace MazayTests.Core.Model
 {
     public class Answer
     {
-
+        public string str;
     }
 }
