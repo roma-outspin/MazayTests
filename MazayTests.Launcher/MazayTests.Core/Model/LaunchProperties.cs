@@ -15,9 +15,9 @@ namespace MazayTests.Core.Model
         public int QuestionCount { get; set; }
         public bool QuestionRandom { get; set; }
         public bool AnswerRandom { get; set; }
-        //public List<Question> SelectedQuestions { get; set; }
+        public List<Question> SelectedQuestions { get; set; }
 
-        private CustomMode _cutomMode;
+        private CustomMode _customMode;
 
     }
 }
