@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace MazayTests.Core.Model
 {
-    class InteractiveTest
+    public class InteractiveTest
     {
+        public List<Question> Questions { get; set; }
+        public LaunchProperties StartProperties { get; set; }
+        public List<string> Sounds { get; set; }
+        public List <string> Images { get; set; }
     }
 }
