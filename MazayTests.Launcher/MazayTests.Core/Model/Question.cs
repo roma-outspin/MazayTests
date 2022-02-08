@@ -8,11 +8,11 @@ namespace MazayTests.Core.Model
 {
     public class Question
     {
-        public int GuidQuestion { get; set; }
-        public string TextQuestion { get; set; }
-        public List<string> TextAnswer { get; set; }
-        public List<string> ImagesForAnswer { get; set; }
-        public List<string> SoundForAnswer { get; set; }
-        public List<string> RightAnswer { get; set; }
+        public Guid GuidQuestion { get; set; }
+        public string Text { get; set; }
+        public List<Answer> Answers { get; set; }
+        public List<string> AnswerImages { get; set; }
+        public List<string> AnswerSounds { get; set; }
+        public List<string> RightAnswers { get; set; }
     }
 }

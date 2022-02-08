@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazayTests.Launcher", "Maza
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazayTests.Core", "MazayTests.Core\MazayTests.Core.csproj", "{69B7A4F3-B8D3-475F-9D03-F63D810F90DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test Builder", "Test Builder\Test Builder.csproj", "{E02FD79B-AC00-4250-97A5-A1F8F1135B68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazayTestsManager", "Test Builder\MazayTestsManager.csproj", "{E02FD79B-AC00-4250-97A5-A1F8F1135B68}"
 	ProjectSection(ProjectDependencies) = postProject
 		{69B7A4F3-B8D3-475F-9D03-F63D810F90DB} = {69B7A4F3-B8D3-475F-9D03-F63D810F90DB}
 	EndProjectSection

@@ -7,4 +7,8 @@
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MazayTests.Core\MazayTests.Core.csproj" />
+  </ItemGroup>
+
 </Project>
