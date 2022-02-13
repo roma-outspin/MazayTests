@@ -1,7 +1,7 @@
 ﻿
 namespace Test_Builder
 {
-    partial class managerTestsForm
+    partial class ManagerTestsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -70,7 +70,7 @@ namespace Test_Builder
             this.vScrollBar1.TabIndex = 0;
             this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
             // 
-            // managerTestsForm
+            // ManagerTestsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -78,9 +78,9 @@ namespace Test_Builder
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ReFresh);
             this.Controls.Add(this.buttonParams);
-            this.Name = "managerTestsForm";
-            this.Text = "managerTestsForm";
-            this.Load += new System.EventHandler(this.managerTestsForm_Load);
+            this.Name = "ManagerTestsForm";
+            this.Text = "ManagerTestsForm";
+            this.Load += new System.EventHandler(this.ManagerTestsForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

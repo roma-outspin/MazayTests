@@ -11,29 +11,29 @@ using System.Windows.Forms;
 
 namespace Test_Builder
 {
-    public partial class managerTestsForm : Form
+    public partial class ManagerTestsForm : Form
     {
-        public managerTestsForm()
+        public ManagerTestsForm()
         {
             InitializeComponent();
-            testsButton = new List<Button>();
-            folderTest = Directory.GetDirectories("Tests");
-            ShowFolderTests(folderTest);
+            generatedButton = new List<Button>();
+            foldersTest = Directory.GetDirectories("Tests");
+            ShowFoldersTests(foldersTest);
         }
-        List<Button> testsButton;
+        List<Button> generatedButton;
         
-        string[] folderTest;
-        private void managerTestsForm_Load(object sender, EventArgs e)
+        string[] foldersTest;
+        private void ManagerTestsForm_Load(object sender, EventArgs e)
         {
 
         }
 
-        public void CreateButton(int number, string name, int x, int y, EventHandler myMethodName)
+        public void CreateButton(int number, string name, int x, int y, EventHandler functionClick)
         {
             Button button = new Button();
             button.Text = name;
             button.Size = new Size(75, 23);
-            button.Click += myMethodName;
+            button.Click += functionClick;
             if (number == 0)
             {
                 button.Location = new Point(x, y);
@@ -43,55 +43,68 @@ namespace Test_Builder
                 button.Location = new Point( 95 * number, y);
             }
             panel1.Controls.Add(button);
-            testsButton.Add(button);
+            generatedButton.Add(button);
         }
 
-        private void ButtonShowLable(object sender, EventArgs e)
+        private void FolderTest_Click(object sender, EventArgs e)
         {
             panel1.Controls.Clear();
             panel1.Controls.Add(vScrollBar1);
-            ShowFolderTests(folderTest);
-            ShowLableTest(Directory.GetFiles(((Button)sender).Text));
+            ShowFoldersTests(foldersTest);
+            ShowLablesTests(Directory.GetFiles(((Button)sender).Text));
         }
-
-
-
-        private void ShowFolderTests(string[] tests)
+        private void ShowFoldersTests(string[] tests)
         {
             for (int i = 0; i < tests.Length; i++)
             {
-                CreateButton(i, tests[i], 10, 10, ButtonShowLable);
+                CreateButton(i, tests[i], 10, 10, FolderTest_Click);
             }
         }
-        public void CreateLableTests(int number, string name)
+        public void CreateButtonsStartSettings(int y)
         {
-            Label test = new Label();
+            string[] nameButton =  { "старт", "настройки" };
+            
+            for (int i = 0; i < nameButton.Length; i++)
+                if(nameButton[i] == "старт") 
+                {
+                    int x = 300;
+                    CreateButton(i, nameButton[i], x, y, Start_Click);
+                    CreateButton(i, nameButton[i+1], x + 75, y, Settings_Click);
+                }   
+        }
+        public void CreateLableTestsWithButtons(int number, string name)
+        {
+            Label test = new();
             test.Text = name;
-            if(number == 0)
+            test.AutoSize = true;
+            if (number == 0)
             {
-                test.Location = new Point(10, 52);
-                CreateButton(0, "старт", 200, 50, ButtonStartDelete);
-                CreateButton(0, "настройки", 275, 50, ButtonStartDelete);
+                test.Location = new Point(10, 50);
+                CreateButtonsStartSettings(50);
             }
             if (number > 0)
             {
                 test.Location = new Point(10, 22 * number + 50);
-                CreateButton(0, "старт", 200, 20 * number + 50,ButtonStartDelete);
-                CreateButton(0, "настройки", 275, 20 * number + 50, ButtonStartDelete);
+                CreateButtonsStartSettings(20 * number + 50);
             }
             panel1.Controls.Add(test);
         }
-        private void ShowLableTest(string[] files)
+        private void ShowLablesTests(string[] fileTests)
         {
-            for (int i = 0; i < files.Length; i++)
+            for (int i = 0; i < fileTests.Length; i++)
             {
-                CreateLableTests(i, files[i]);
+                CreateLableTestsWithButtons(i, fileTests[i]);
             }
         }
-        //метод заглушка для кнопок старт и настройки
-        private void ButtonStartDelete(object sender, EventArgs e)
+        //метод заглушка для кнопоки старт
+        private void Start_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("функция в процессе разработки");
+            MessageBox.Show("нажата кнопка старт");
+        }
+        //метод заглушка для кнопки настройки
+        private void Settings_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("нажата кнопка настройки");
         }
 
         private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)

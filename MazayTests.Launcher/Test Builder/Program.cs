@@ -13,16 +13,20 @@ namespace Test_Builder
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             if (Directory.Exists("Tests"))
             {
-                Application.Run(new managerTestsForm());
+                Application.Run(new ManagerTestsForm());
             }
             else Application.Run(new StartForm());
+            FakeGenerateTest fakeTest = new();
+            fakeTest.SerializeTest(fakeTest.GetInteractiveTest());
+            fakeTest.Deserialize();
+            
         }
     }
 }
