@@ -13,6 +13,7 @@ namespace Test_Builder
 {
     public partial class ManagerTestsForm : Form
     {
+        //для пулреквеста
         public ManagerTestsForm()
         {
             InitializeComponent();
