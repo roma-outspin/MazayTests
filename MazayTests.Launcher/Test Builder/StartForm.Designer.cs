@@ -1,5 +1,5 @@
 ﻿
-namespace Test_Builder
+namespace ManagerTests
 {
     partial class StartForm
     {
@@ -41,7 +41,6 @@ namespace Test_Builder
             this.label1.Size = new System.Drawing.Size(419, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque.";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // Start
             // 

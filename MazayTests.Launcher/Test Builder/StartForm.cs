@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Test_Builder
+namespace ManagerTests
 {
     public partial class StartForm : Form
     {
@@ -17,15 +17,9 @@ namespace Test_Builder
         {
             InitializeComponent();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         // Метод заглушка
         private void Start_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Тест создан");
             if (!Directory.Exists("Tests"))
             {
                 Directory.CreateDirectory("Tests");
@@ -35,8 +29,9 @@ namespace Test_Builder
             {
                 File.Create("Tests/Tests1/tests1.txt");
             }
+            MessageBox.Show("Тест создан");
+            Close();
         }
-
         private void StartForm_Load(object sender, EventArgs e)
         {
 

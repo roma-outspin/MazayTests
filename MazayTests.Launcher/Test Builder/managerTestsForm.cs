@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ManegerTests;
+using MazayTests.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,28 +10,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Test_Builder;
 
-namespace Test_Builder
+namespace ManagerTests
 {
     public partial class ManagerTestsForm : Form
     {
-        //для пулреквеста
+        List<Button> _generatedButton;
+        string[] _foldersTest;
+
         public ManagerTestsForm()
         {
             InitializeComponent();
-            generatedButton = new List<Button>();
-            foldersTest = Directory.GetDirectories("Tests");
-            ShowFoldersTests(foldersTest);
+            _generatedButton = new List<Button>();
+            _foldersTest = Directory.GetDirectories("Tests");
+            ShowFolders(_foldersTest);
         }
-        List<Button> generatedButton;
-        
-        string[] foldersTest;
-        private void ManagerTestsForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        public void CreateButton(int number, string name, int x, int y, EventHandler functionClick)
+        private void CreateButton(int number, string name, int x, int y, EventHandler functionClick)
         {
             Button button = new Button();
             button.Text = name;
@@ -39,29 +36,29 @@ namespace Test_Builder
             {
                 button.Location = new Point(x, y);
             }
-            if (number > 0)
+            else
             {
                 button.Location = new Point( 95 * number, y);
             }
             panel1.Controls.Add(button);
-            generatedButton.Add(button);
+            _generatedButton.Add(button);
         }
 
-        private void FolderTest_Click(object sender, EventArgs e)
+        private void Folder_Click(object sender, EventArgs e)
         {
             panel1.Controls.Clear();
             panel1.Controls.Add(vScrollBar1);
-            ShowFoldersTests(foldersTest);
-            ShowLablesTests(Directory.GetFiles(((Button)sender).Text));
+            ShowFolders(_foldersTest);
+            ShowTests(Directory.GetFiles(((Button)sender).Text));
         }
-        private void ShowFoldersTests(string[] tests)
+        private void ShowFolders(string[] tests)
         {
             for (int i = 0; i < tests.Length; i++)
             {
-                CreateButton(i, tests[i], 10, 10, FolderTest_Click);
+                CreateButton(i, tests[i], 10, 10, Folder_Click);
             }
         }
-        public void CreateButtonsStartSettings(int y)
+        private void GetButtonsForTest(int y)
         {
             string[] nameButton =  { "старт", "настройки" };
             
@@ -73,7 +70,7 @@ namespace Test_Builder
                     CreateButton(i, nameButton[i+1], x + 75, y, Settings_Click);
                 }   
         }
-        public void CreateLableTestsWithButtons(int number, string name)
+        private void GetTestWithButtons(int number, string name)
         {
             Label test = new();
             test.Text = name;
@@ -81,20 +78,20 @@ namespace Test_Builder
             if (number == 0)
             {
                 test.Location = new Point(10, 50);
-                CreateButtonsStartSettings(50);
+                GetButtonsForTest(50);
             }
-            if (number > 0)
+            else
             {
                 test.Location = new Point(10, 22 * number + 50);
-                CreateButtonsStartSettings(20 * number + 50);
+                GetButtonsForTest(20 * number + 50);
             }
             panel1.Controls.Add(test);
         }
-        private void ShowLablesTests(string[] fileTests)
+        private void ShowTests(string[] fileTests)
         {
             for (int i = 0; i < fileTests.Length; i++)
             {
-                CreateLableTestsWithButtons(i, fileTests[i]);
+                GetTestWithButtons(i, fileTests[i]);
             }
         }
         //метод заглушка для кнопоки старт
@@ -107,8 +104,18 @@ namespace Test_Builder
         {
             MessageBox.Show("нажата кнопка настройки");
         }
-
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void Serializ_Click(object sender, EventArgs e)
+        {
+            TestGenerator test = new();
+            Serialization serialization = new();
+            serialization.Serialize(test.GetTest());
+        }
+        private void Deserializ_Click(object sender, EventArgs e)
+        {
+            Deserialization deserialization = new();
+            deserialization.Deserialize();
+        }
+        private void ManagerTestsForm_Load(object sender, EventArgs e)
         {
 
         }

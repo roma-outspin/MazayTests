@@ -1,11 +1,13 @@
+using ManegerTests;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Test_Builder;
 
-namespace Test_Builder
+namespace ManagerTests
 {
     static class Program
     {
@@ -18,15 +20,16 @@ namespace Test_Builder
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             if (Directory.Exists("Tests"))
             {
                 Application.Run(new ManagerTestsForm());
             }
-            else Application.Run(new StartForm());
-            FakeGenerateTest fakeTest = new();
-            fakeTest.SerializeTest(fakeTest.GetInteractiveTest());
-            fakeTest.Deserialize();
-            
+            else
+            {
+                Application.Run(new StartForm());
+                Application.Run(new ManagerTestsForm());
+            }
         }
     }
 }

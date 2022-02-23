@@ -7,26 +7,11 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
 
-namespace Test_Builder
+namespace ManegerTests
 {
-    class FakeGenerateTest
+    class TestGenerator
     {
-        public Question GetQuestion( string text, string rightAnswers, string anwer)
-        {
-            Question q = new();
-            Answer a1 = new();
-            Answer a2 = new();
-            q.Text = text;
-            q.RightAnswers = new();
-            q.RightAnswers.Add(rightAnswers);
-            a1.Text = rightAnswers;
-            a2.Text = anwer;
-            q.Answers = new();
-            q.Answers.Add(a1);
-            q.Answers.Add(a2);
-            return q;
-        }
-        public InteractiveTest GetInteractiveTest()
+        public InteractiveTest GetTest()
         {
             InteractiveTest Test = new();
             Question q1 = GetQuestion("Так называется самый крупный каменноугольный бассейн России.", "Кузнецкий", "Печорский");
@@ -39,20 +24,31 @@ namespace Test_Builder
             Test.Questions.Add(q3);
             Test.Images = null;
             Test.Sounds = null;
-            Test.StartProperties = new() {Timer =new(), withBackButton = false, withNextButton = false,
-            QuestionCount = 0, AnswerRandom= true, QuestionRandom = true};
+            Test.StartProperties = new()
+            {
+                Timer = new(),
+                withBackButton = false,
+                withNextButton = false,
+                QuestionCount = 0,
+                AnswerRandom = true,
+                QuestionRandom = true
+            };
             return Test;
         }
-        public void SerializeTest(InteractiveTest Test)
+        private Question GetQuestion( string text, string rightAnswers, string answer)
         {
-            string str = JsonSerializer.Serialize<InteractiveTest>(Test);
-            File.WriteAllText(@"Tests\1\Test1.json", str);   
-        }
-        public InteractiveTest Deserialize() 
-        {
-            string str = File.ReadAllText(@"Tests\1\Test1.json");
-            var result = JsonSerializer.Deserialize<InteractiveTest>(str);
-            return result;
+            Question q = new();
+            Answer a1 = new();
+            Answer a2 = new();
+            q.Text = text;
+            q.RightAnswers = new();
+            q.RightAnswers.Add(rightAnswers);
+            a1.Text = rightAnswers;
+            a2.Text = answer;
+            q.Answers = new();
+            q.Answers.Add(a1);
+            q.Answers.Add(a2);
+            return q;
         }
     }
 }

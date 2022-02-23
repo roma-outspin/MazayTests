@@ -1,5 +1,5 @@
 ﻿
-namespace Test_Builder
+namespace ManagerTests
 {
     partial class ManagerTestsForm
     {
@@ -33,6 +33,8 @@ namespace Test_Builder
             this.ReFresh = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
+            this.deserializ = new System.Windows.Forms.Button();
+            this.Serializ = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,13 +70,34 @@ namespace Test_Builder
             this.vScrollBar1.Name = "vScrollBar1";
             this.vScrollBar1.Size = new System.Drawing.Size(22, 201);
             this.vScrollBar1.TabIndex = 0;
-            this.vScrollBar1.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar1_Scroll);
+            // 
+            // deserializ
+            // 
+            this.deserializ.Location = new System.Drawing.Point(538, 24);
+            this.deserializ.Name = "deserializ";
+            this.deserializ.Size = new System.Drawing.Size(75, 23);
+            this.deserializ.TabIndex = 4;
+            this.deserializ.Text = "Десериал";
+            this.deserializ.UseVisualStyleBackColor = true;
+            this.deserializ.Click += new System.EventHandler(this.Deserializ_Click);
+            // 
+            // Serializ
+            // 
+            this.Serializ.Location = new System.Drawing.Point(457, 24);
+            this.Serializ.Name = "Serializ";
+            this.Serializ.Size = new System.Drawing.Size(75, 23);
+            this.Serializ.TabIndex = 5;
+            this.Serializ.Text = "Сериализ";
+            this.Serializ.UseVisualStyleBackColor = true;
+            this.Serializ.Click += new System.EventHandler(this.Serializ_Click);
             // 
             // ManagerTestsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 272);
+            this.Controls.Add(this.Serializ);
+            this.Controls.Add(this.deserializ);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.ReFresh);
             this.Controls.Add(this.buttonParams);
@@ -91,5 +114,7 @@ namespace Test_Builder
         private System.Windows.Forms.Button ReFresh;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.VScrollBar vScrollBar1;
+        private System.Windows.Forms.Button deserializ;
+        private System.Windows.Forms.Button Serializ;
     }
 }
