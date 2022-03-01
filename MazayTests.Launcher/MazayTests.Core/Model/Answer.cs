@@ -8,8 +8,8 @@ namespace MazayTests.Core.Model
 {
     public class Answer
     {
-        public List<string> TextAnswer { get; set; }
-        public bool AnswerStrictlyWithImage { get; set; }
-        public bool AnswerStrictlyWithSound { get; set; }
+        public string Text { get; set; }
+        public bool DefaultImage { get; set; }
+        public bool DefaultSound { get; set; }
     }
 }
