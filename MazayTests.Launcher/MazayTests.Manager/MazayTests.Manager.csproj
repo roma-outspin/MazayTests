@@ -3,12 +3,21 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <RootNamespace>Test_Builder</RootNamespace>
+    <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MazayTests.Core\MazayTests.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ManagerTestsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="StartForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

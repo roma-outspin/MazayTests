@@ -1,5 +1,5 @@
 ﻿
-namespace ManagerTests
+namespace MazayTests.Manager
 {
     partial class StartForm
     {
@@ -44,8 +44,8 @@ namespace ManagerTests
             // 
             // Start
             // 
-            this.Start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.Start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Start.Location = new System.Drawing.Point(268, 203);
             this.Start.Name = "Start";

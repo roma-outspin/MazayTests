@@ -8,8 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using MazayTests.Core;
 
-namespace ManagerTests
+namespace MazayTests.Manager
 {
     public partial class StartForm : Form
     {
@@ -25,12 +26,14 @@ namespace ManagerTests
                 Directory.CreateDirectory("Tests");
                 Directory.CreateDirectory("Tests/Tests1");
             }
-            if (!File.Exists("Tests/Tests1/tests1.txt"))
+            if (!File.Exists(@"Tests/Tests1/tests1.json"))
             {
-                File.Create("Tests/Tests1/tests1.txt");
+                new TestBuilder().SaveTest (new TestGenerator().GetTest("tests1"), @"Tests/Tests1/tests1.json");
+                   
             }
             MessageBox.Show("Тест создан");
-            Close();
+            new ManagerTestsForm().Show();
+            Hide();
         }
         private void StartForm_Load(object sender, EventArgs e)
         {

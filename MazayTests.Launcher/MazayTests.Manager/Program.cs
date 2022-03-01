@@ -1,13 +1,11 @@
-using ManegerTests;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Test_Builder;
 
-namespace ManagerTests
+namespace MazayTests.Manager
 {
     static class Program
     {
@@ -28,7 +26,7 @@ namespace ManagerTests
             else
             {
                 Application.Run(new StartForm());
-                Application.Run(new ManagerTestsForm());
+                //Application.Run(new ManagerTestsForm());
             }
         }
     }
