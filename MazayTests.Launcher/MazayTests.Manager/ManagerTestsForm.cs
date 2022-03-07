@@ -23,11 +23,9 @@ namespace MazayTests.Manager
         public ManagerTestsForm()
         {
             InitializeComponent();
-
-            _testCollections = Directory.GetDirectories("Tests");
-            _currentCollection = _testCollections[0];
+            _testCollections = Directory.GetDirectories("Tests\\");
+           // _currentCollection = _testCollections[0];
             ShowCollections(_testCollections);
-
         }
 
         private void ShowCollections(string[] collectionPathes)
@@ -55,21 +53,22 @@ namespace MazayTests.Manager
         {
             testsPanel.Items.Clear();
             //testsPanel.Controls.Add(vScrollBar1);
-            ShowCollections(_testCollections);
-            _currentCollection = ((Button)sender).Text;
+             ShowCollections(_testCollections);
+             _currentCollection = ((Button)sender).Text;
             var testsInCollection = Directory.GetFiles(((Button)sender).Text, "*.json");
             ShowTests(testsInCollection);
         }
 
         private void ShowTests(string[] tests)
         {
-            for (int i = 0; i < tests.Length; i++)
+            foreach (string test in tests)
             {
-                GetTestWithButtons(i, tests[i]);
+                var testInfo = new FileInfo(test);
+                GetTests(testInfo.Name);
             }
         }
 
-        private void GetTestWithButtons(int number, string name)
+        private void GetTests(string name)
         {
             Label test = new();
             test.Click += SelectTest;
@@ -135,11 +134,19 @@ namespace MazayTests.Manager
         {
             //метод сканирования папки Tests и добавления/удаления коллекций с формы
         }
+        private void DeleteColections()
+        {
 
+        }
         private void CreateCollection(string Name)
         {
             //метод создания новой коллекции
             //+аналогичный метод для удаления коллекции с проверкой на присутствие в ней тестов
+        }
+
+        private void testsPanel_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
         //вынести отдельно кнопки старт/сеттингс
         //CreateCollectionButton() поправить
