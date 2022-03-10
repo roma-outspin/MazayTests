@@ -1,14 +1,8 @@
 ﻿
 using MazayTests.Core;
+using Microsoft.VisualBasic;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -19,48 +13,48 @@ namespace MazayTests.Manager
         string[] _testCollections;
         string _currentCollection;
         string _currentTest;
+        bool flag;
 
         public ManagerTestsForm()
         {
             InitializeComponent();
-            _testCollections = Directory.GetDirectories("Tests\\");
-           // _currentCollection = _testCollections[0];
+            _testCollections = Directory.GetDirectories("Tests");
+            _currentCollection = _testCollections[0];
             ShowCollections(_testCollections);
         }
 
         private void ShowCollections(string[] collectionPathes)
         {
-            for (int i = 0; i < collectionPathes.Length; i++)
+            collectionPanel.Clear();
+            GetHeaderCollectionPanel();
+            foreach (string coll in collectionPathes)
             {
-                CreateCollectionButton(i, collectionPathes[i], 10, 2, SelectCollection_Click);
+                ListViewItem collection = new ListViewItem();
+                collection.Text = coll;
+                collectionPanel.Items.Add(collection);
+                collectionPanel.Click += SelectCollection_Click;
             }
         }
 
-        private void CreateCollectionButton(int number, string name, int x, int y, EventHandler functionClick)
+        private void GetHeaderCollectionPanel()
         {
-            Button button = new Button();
-            button.Text = name;
-            button.Size = new Size(75, 23);
-            button.Click += functionClick;
-
-            button.Location = new Point(85 * number+x, y);
-
-            collectionPanel.Controls.Add(button);
-           
+            ColumnHeader header = new ColumnHeader();
+            collectionPanel.Columns.Add(header);
+            collectionPanel.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        private void SelectCollection_Click(object sender, EventArgs e)
+        private void SelectCollection_Click(object? sender, EventArgs e)
         {
-            testsPanel.Items.Clear();
-            //testsPanel.Controls.Add(vScrollBar1);
-             ShowCollections(_testCollections);
-             _currentCollection = ((Button)sender).Text;
-            var testsInCollection = Directory.GetFiles(((Button)sender).Text, "*.json");
+            _currentTest = string.Empty;
+            _currentCollection = collectionPanel.FocusedItem.SubItems[0].Text;
+            var testsInCollection = Directory.GetFiles(_currentCollection, "*.json");
             ShowTests(testsInCollection);
         }
 
         private void ShowTests(string[] tests)
         {
+            testsPanel.Clear();
+            GetHeaderTestsPanel();
             foreach (string test in tests)
             {
                 var testInfo = new FileInfo(test);
@@ -68,17 +62,21 @@ namespace MazayTests.Manager
             }
         }
 
+        private void GetHeaderTestsPanel()
+        {
+            ColumnHeader header = new ColumnHeader();
+            testsPanel.Columns.Add(header);
+            testsPanel.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
         private void GetTests(string name)
         {
             Label test = new();
-            test.Click += SelectTest;
-            test.DoubleClick += OpenTest;
             test.Text = name;
             test.AutoSize = true;
-
-
             testsPanel.Items.Add(new ListViewItem(name));
-
+            testsPanel.Click += SelectTest;
+            testsPanel.DoubleClick += OpenTest;
         }
 
         private void OpenTest(object sender, EventArgs e)
@@ -89,22 +87,13 @@ namespace MazayTests.Manager
 
         private void SelectTest(object sender, EventArgs e)
         {
-            foreach(var lbl in testsPanel.Controls)
-            {
-                if (lbl is Label)
-                {
-                    ((Label)lbl).BackColor = Color.Transparent;
-                }
-            }
-            ((Label)sender).BackColor = Color.Red;
-            _currentTest = ((Label)sender).Text;
-
+            _currentTest = _currentCollection + "\\" + testsPanel.FocusedItem.SubItems[0].Text;
         }
 
         private void Serializ_Click(object sender, EventArgs e)
         {
             var test = new TestGenerator().GetTest(textBox1.Text);
-            new TestBuilder().SaveTest(test, _currentCollection+$"\\{test.Name}.json");
+            new TestBuilder().SaveTest(test, _currentCollection + $"\\{test.Name}.json");
         }
 
         private void ManagerTestsForm_Load(object sender, EventArgs e)
@@ -116,7 +105,6 @@ namespace MazayTests.Manager
         {
             Application.Exit();
         }
-
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
@@ -130,25 +118,99 @@ namespace MazayTests.Manager
             }
         }
 
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            if (_currentTest == string.Empty)
+            {
+                DialogDeleteCollection();
+            }
+            else
+            {
+                DialogDeleteTest();
+            }
+        }
+
+        private void DialogDeleteCollection()
+        {
+            if (Directory.Exists(_currentCollection))
+            {
+                string[] tests = Directory.GetFiles(_currentCollection, "*.json");
+                if (tests.Length != 0)
+                {
+                    DialogResult result = MessageBox.Show($"В папке есть тесты {tests.Length} шт. \n Продолжить удаление?",
+                     "Сообщение",
+                     MessageBoxButtons.YesNo,
+                     MessageBoxIcon.Information,
+                     MessageBoxDefaultButton.Button1,
+                     MessageBoxOptions.DefaultDesktopOnly);
+                    if (result == DialogResult.Yes)
+                    {
+                        DeleteCollection();
+                    }
+                }
+                else DeleteCollection();
+            }
+            else MessageBox.Show("Коллекции нет");
+        }
+
+        private void DeleteCollection()
+        {
+                Directory.Delete(_currentCollection, true);
+                MessageBox.Show($"Папка {_currentCollection} удалена");
+                collectionPanel.Items.RemoveAt(collectionPanel.FocusedItem.Index);
+        }
+
+        private void DialogDeleteTest()
+        {
+            if (File.Exists(_currentTest))
+            {
+                DialogResult result = MessageBox.Show($"Удалить тест {testsPanel.FocusedItem.Text} ?",
+                     "Сообщение",
+                      MessageBoxButtons.YesNo,
+                      MessageBoxIcon.Information,
+                      MessageBoxDefaultButton.Button1,
+                      MessageBoxOptions.DefaultDesktopOnly);
+                if (result == DialogResult.Yes)
+                {
+                    DeleteTest();
+                }
+            }
+            else MessageBox.Show("теста нет");
+        }
+
+        private void DeleteTest()
+        {
+            File.Delete(_currentTest);
+            MessageBox.Show($"Тест {testsPanel.FocusedItem.Text} удален");
+            testsPanel.Items.RemoveAt(testsPanel.FocusedItem.Index);
+        }
+
+        private void Update_Click(object sender, EventArgs e)
+        {
+            if(_currentTest== string.Empty)
+            {
+                UpdateCollections();
+            }
+            else ShowTests(Directory.GetFiles(_currentCollection));
+        }
+
         private void UpdateCollections()
         {
-            //метод сканирования папки Tests и добавления/удаления коллекций с формы
+            ShowCollections(Directory.GetDirectories("Tests"));
         }
-        private void DeleteColections()
+        private void Add_Click(object sender, EventArgs e)
         {
-
-        }
-        private void CreateCollection(string Name)
-        {
-            //метод создания новой коллекции
-            //+аналогичный метод для удаления коллекции с проверкой на присутствие в ней тестов
+            string result = Interaction.InputBox("Введите название:");
+            CreateCollection($"Tests\\{result}") ;
         }
 
-        private void testsPanel_SelectedIndexChanged(object sender, EventArgs e)
+        private void CreateCollection(string name)
         {
-
+            if (!Directory.Exists(name))
+            {
+                Directory.CreateDirectory(name);
+            }   
+            UpdateCollections();
         }
-        //вынести отдельно кнопки старт/сеттингс
-        //CreateCollectionButton() поправить
     }
 }
