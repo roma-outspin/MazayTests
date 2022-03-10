@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 
 namespace MazayTests.Manager
-{
+{ //для пулреквеста
     public partial class ManagerTestsForm : Form
     {
         string[] _testCollections;
