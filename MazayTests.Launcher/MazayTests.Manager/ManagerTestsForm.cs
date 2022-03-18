@@ -7,20 +7,21 @@ using System.Windows.Forms;
 
 
 namespace MazayTests.Manager
-{ //для пулреквеста
+{
     public partial class ManagerTestsForm : Form
     {
         string[] _testCollections;
         string _currentCollection;
         string _currentTest;
-        bool flag;
 
+        AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
         public ManagerTestsForm()
         {
             InitializeComponent();
             _testCollections = Directory.GetDirectories("Tests");
             _currentCollection = _testCollections[0];
             ShowCollections(_testCollections);
+            coll.AddRange(_testCollections);
         }
 
         private void ShowCollections(string[] collectionPathes)
@@ -81,8 +82,15 @@ namespace MazayTests.Manager
 
         private void OpenTest(object sender, EventArgs e)
         {
-            var test = new TestBuilder().OpenTest(_currentTest);
-            MessageBox.Show(test.Name);
+            if (_currentTest == string.Empty)
+            {
+                MessageBox.Show("Выберите тест для запуска");
+            }
+            else
+            {
+                var test = new TestBuilder().OpenTest(_currentTest);
+                MessageBox.Show(test.Name);
+            }
         }
 
         private void SelectTest(object sender, EventArgs e)
@@ -90,32 +98,14 @@ namespace MazayTests.Manager
             _currentTest = _currentCollection + "\\" + testsPanel.FocusedItem.SubItems[0].Text;
         }
 
-        private void Serializ_Click(object sender, EventArgs e)
-        {
-            var test = new TestGenerator().GetTest(textBox1.Text);
-            new TestBuilder().SaveTest(test, _currentCollection + $"\\{test.Name}.json");
-        }
-
         private void ManagerTestsForm_Load(object sender, EventArgs e)
         {
-
+            autoCompleteData();
         }
 
         private void ManagerTestsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            if (((TextBox)sender).Text.Length < 1)
-            {
-                Serializ.Enabled = false;
-            }
-            else
-            {
-                Serializ.Enabled = true;
-            }
         }
 
         private void Delete_Click(object sender, EventArgs e)
@@ -155,9 +145,9 @@ namespace MazayTests.Manager
 
         private void DeleteCollection()
         {
-                Directory.Delete(_currentCollection, true);
-                MessageBox.Show($"Папка {_currentCollection} удалена");
-                collectionPanel.Items.RemoveAt(collectionPanel.FocusedItem.Index);
+            Directory.Delete(_currentCollection, true);
+            MessageBox.Show($"Папка {_currentCollection} удалена");
+            collectionPanel.Items.RemoveAt(collectionPanel.FocusedItem.Index);
         }
 
         private void DialogDeleteTest()
@@ -187,7 +177,7 @@ namespace MazayTests.Manager
 
         private void Update_Click(object sender, EventArgs e)
         {
-            if(_currentTest== string.Empty)
+            if (_currentTest == string.Empty)
             {
                 UpdateCollections();
             }
@@ -198,19 +188,73 @@ namespace MazayTests.Manager
         {
             ShowCollections(Directory.GetDirectories("Tests"));
         }
+
         private void Add_Click(object sender, EventArgs e)
         {
-            string result = Interaction.InputBox("Введите название:");
-            CreateCollection($"Tests\\{result}") ;
+            DialogResult result = MessageBox.Show($"Добавить тест в коллекцию {_currentCollection}?\n" +
+                $" \n" +
+                $"Чтобы создать новую коллекцию с тестами нажмите нет",
+
+                 "Сообщение",
+                 MessageBoxButtons.YesNoCancel,
+                 MessageBoxIcon.Information,
+                 MessageBoxDefaultButton.Button1,
+                 MessageBoxOptions.DefaultDesktopOnly);
+            if (result == DialogResult.Yes)
+            {
+                CreateTest();
+            }
+            if (result == DialogResult.No)
+            {
+                CreateCollection();
+            }
         }
 
-        private void CreateCollection(string name)
+        private void CreateTest()
         {
-            if (!Directory.Exists(name))
+            string title = Interaction.InputBox("Введите название нового теста:");
+            string path = $"{_currentCollection}\\{title}.json";
+            if (!File.Exists(path) && title != string.Empty)
             {
-                Directory.CreateDirectory(name);
-            }   
-            UpdateCollections();
+                var test = new TestGenerator().GetTest(title);
+                new TestBuilder().SaveTest(test, _currentCollection + $"\\{test.Name}.json");
+                ShowTests(Directory.GetFiles(_currentCollection));
+                new CreatorTestForm().Show();
+                Hide();
+            }
+            else MessageBox.Show("Тест не будет создан! \n Возможные причины\n" +
+                "-Нажата кнопкка отмены\n" +
+                "-Не введен текст\n" +
+                "-Тест с таким именем уже существует");
+        }
+
+        private void CreateCollection()
+        {
+            string title = Interaction.InputBox("Введите название новой коллекции:");
+            string path = $"Tests\\{title}";
+            if (!Directory.Exists($"{path}") && title != string.Empty)
+            {
+                _currentCollection = Directory.CreateDirectory($"{path}").FullName;
+                UpdateCollections();
+                CreateTest();
+            }
+            else
+            {
+                MessageBox.Show("Коллекция не будет создана! \n Возможные причины\n" +
+                "-Нажата кнопкка отмены\n" +
+                "-Не введен текст\n" +
+                "-Коллекция с таким именем уже существует");
+            }
+        }
+
+        private void searchBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void autoCompleteData()
+        {
+            searchBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            searchBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
     }
 }
