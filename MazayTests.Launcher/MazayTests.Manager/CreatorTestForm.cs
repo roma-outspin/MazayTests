@@ -1,4 +1,5 @@
-﻿using MazayTests.Core.Model;
+﻿using MazayTests.Core;
+using MazayTests.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,43 +14,28 @@ namespace MazayTests.Manager
 {
     public partial class CreatorTestForm : Form
     {
-        TestGenerator test = new();
-        Question question = new();
-       
+        TestGenerator generator = new();
+        ManagerTestsForm managerTests = new();
 
         public CreatorTestForm()
         {
-            InitializeComponent();    
+            InitializeComponent();
+            rightAnswers = new List<string>();
+            answers = new List<Answer>();
+            questions = new List<Question>();
         }
+        List<string> rightAnswers;
+        List<Answer> answers;
+        List<Question> questions;
         private void CreatorTestForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             new ManagerTestsForm().Show();
             Hide();
         }
 
-        private void CreatorTestForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void questionTextBox_TextChanged(object sender, EventArgs e)
-        {
-            //questionTextBox.Text = question.Text;
-        }
-
-        private void rightAnswerTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void answerTextBox_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void addRightAnswer_Click(object sender, EventArgs e)
         {
-            question.RightAnswers.Add(questionTextBox.Text);
+            rightAnswers.Add(questionTextBox.Text);
             rightAnswerTextBox.Clear();
         }
 
@@ -57,13 +43,22 @@ namespace MazayTests.Manager
         {
             Answer answer = new();
             answer.Text = answerTextBox.Text;
-            question.Answers.Add(answer);
+            answers.Add(answer);
             answerTextBox.Clear();
         }
 
         private void addQuestion_Click(object sender, EventArgs e)
         {
+            questions.Add(generator.GetQuestion(questionTextBox.Text, rightAnswers, answers));
+            questionTextBox.Clear();
+        }
 
+        private void saveTest_Click(object sender, EventArgs e)
+        {
+            var test = new TestGenerator().GetTest(managerTests.NameTest, questions);
+            new TestBuilder().SaveTest(test, managerTests.PathToTest);
+            new ManagerTestsForm().Show();
+            Hide();
         }
     }
 }

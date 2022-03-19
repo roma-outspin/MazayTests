@@ -11,21 +11,13 @@ namespace MazayTests.Manager
 {
     class TestGenerator
     {
-        public InteractiveTest GetTest(string name)
+        public InteractiveTest GetTest(string name, List <Question> questions)
         {
             InteractiveTest Test = new()
             {
                 Name = name
             };
-            Question q1 = GetQuestion("Так называется самый крупный каменноугольный бассейн России.", "Кузнецкий", "Печорский");
-            Question q2 = GetQuestion("Согласно некоторым данным, на этой планете были найдены признаки жизни.", "Марс", "Нептун");
-            Question q3 = GetQuestion("В античности это - надпись на памятнике, здании. Также это - текст, " +
-                "помещаемый автором перед текстом всего художественного произведения или его частей.", "Эпиграф", "Варьете");
-
-            Test.Questions = new();
-            Test.Questions.Add(q1);
-            Test.Questions.Add(q2);
-            Test.Questions.Add(q3);
+            Test.Questions = questions;
             Test.Images = null;
             Test.Sounds = null;
             Test.StartProperties = new()
@@ -39,20 +31,13 @@ namespace MazayTests.Manager
             };
             return Test;
         }
-        private Question GetQuestion( string text, string rightAnswers, string answer)
+        public Question GetQuestion( string text, List<string> rightAnswers, List<Answer> answer)
         {
             Question q = new();
-            q.GuidQuestion = Guid.NewGuid();
-            Answer a1 = new();
-            Answer a2 = new();
+            q.GuidQuestion = Guid.NewGuid(); 
             q.Text = text;
-            q.RightAnswers = new();
-            q.RightAnswers.Add(rightAnswers);
-            a1.Text = rightAnswers;
-            a2.Text = answer;
-            q.Answers = new();
-            q.Answers.Add(a1);
-            q.Answers.Add(a2);
+            q.RightAnswers = rightAnswers;
+            q.Answers = answer;
             return q;
         }
     }

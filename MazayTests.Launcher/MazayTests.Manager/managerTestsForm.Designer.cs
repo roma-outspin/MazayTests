@@ -157,7 +157,7 @@ namespace MazayTests.Manager
             this.searchBox1.Name = "searchBox1";
             this.searchBox1.Size = new System.Drawing.Size(268, 23);
             this.searchBox1.TabIndex = 13;
-            this.searchBox1.TextChanged += new System.EventHandler(this.searchBox1_TextChanged);
+
             // 
             // ManagerTestsForm
             // 

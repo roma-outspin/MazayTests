@@ -64,7 +64,6 @@ namespace MazayTests.Manager
             this.Controls.Add(this.label1);
             this.Name = "StartForm";
             this.Text = "StartForm";
-            this.Load += new System.EventHandler(this.StartForm_Load);
             this.ResumeLayout(false);
 
         }

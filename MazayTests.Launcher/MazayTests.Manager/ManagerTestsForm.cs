@@ -22,7 +22,10 @@ namespace MazayTests.Manager
             _currentCollection = _testCollections[0];
             ShowCollections(_testCollections);
             coll.AddRange(_testCollections);
+            
         }
+        public string PathToTest;
+        public string NameTest;
 
         private void ShowCollections(string[] collectionPathes)
         {
@@ -202,7 +205,7 @@ namespace MazayTests.Manager
                  MessageBoxOptions.DefaultDesktopOnly);
             if (result == DialogResult.Yes)
             {
-                CreateTest();
+                ShowCreatorTest();
             }
             if (result == DialogResult.No)
             {
@@ -210,15 +213,12 @@ namespace MazayTests.Manager
             }
         }
 
-        private void CreateTest()
+        public void ShowCreatorTest()
         {
-            string title = Interaction.InputBox("Введите название нового теста:");
-            string path = $"{_currentCollection}\\{title}.json";
-            if (!File.Exists(path) && title != string.Empty)
+            NameTest = Interaction.InputBox("Введите название нового теста:");
+            PathToTest = $"{_currentCollection}\\{NameTest}.json";
+            if (!File.Exists(PathToTest) && NameTest != string.Empty)
             {
-                var test = new TestGenerator().GetTest(title);
-                new TestBuilder().SaveTest(test, _currentCollection + $"\\{test.Name}.json");
-                ShowTests(Directory.GetFiles(_currentCollection));
                 new CreatorTestForm().Show();
                 Hide();
             }
@@ -236,7 +236,7 @@ namespace MazayTests.Manager
             {
                 _currentCollection = Directory.CreateDirectory($"{path}").FullName;
                 UpdateCollections();
-                CreateTest();
+                ShowCreatorTest();
             }
             else
             {
@@ -247,10 +247,6 @@ namespace MazayTests.Manager
             }
         }
 
-        private void searchBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         private void autoCompleteData()
         {
             searchBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;

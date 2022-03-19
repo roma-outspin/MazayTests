@@ -38,7 +38,7 @@ namespace MazayTests.Manager
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.addQuestion = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.saveTest = new System.Windows.Forms.Button();
             this.addRightAnswer = new System.Windows.Forms.Button();
             this.addAnswer = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -50,7 +50,6 @@ namespace MazayTests.Manager
             this.questionTextBox.Size = new System.Drawing.Size(776, 58);
             this.questionTextBox.TabIndex = 1;
             this.questionTextBox.Text = "";
-            this.questionTextBox.TextChanged += new System.EventHandler(this.questionTextBox_TextChanged);
             // 
             // rightAnswerTextBox
             // 
@@ -59,7 +58,6 @@ namespace MazayTests.Manager
             this.rightAnswerTextBox.Size = new System.Drawing.Size(776, 58);
             this.rightAnswerTextBox.TabIndex = 2;
             this.rightAnswerTextBox.Text = "";
-            this.rightAnswerTextBox.TextChanged += new System.EventHandler(this.rightAnswerTextBox_TextChanged);
             // 
             // label1
             // 
@@ -86,7 +84,6 @@ namespace MazayTests.Manager
             this.answerTextBox.Size = new System.Drawing.Size(776, 59);
             this.answerTextBox.TabIndex = 5;
             this.answerTextBox.Text = "";
-            this.answerTextBox.TextChanged += new System.EventHandler(this.answerTextBox_TextChanged);
             // 
             // label3
             // 
@@ -125,14 +122,15 @@ namespace MazayTests.Manager
             this.addQuestion.UseVisualStyleBackColor = true;
             this.addQuestion.Click += new System.EventHandler(this.addQuestion_Click);
             // 
-            // button4
+            // saveTest
             // 
-            this.button4.Location = new System.Drawing.Point(669, 413);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(119, 25);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Сохранить тест";
-            this.button4.UseVisualStyleBackColor = true;
+            this.saveTest.Location = new System.Drawing.Point(669, 413);
+            this.saveTest.Name = "saveTest";
+            this.saveTest.Size = new System.Drawing.Size(119, 25);
+            this.saveTest.TabIndex = 12;
+            this.saveTest.Text = "Сохранить тест";
+            this.saveTest.UseVisualStyleBackColor = true;
+            this.saveTest.Click += new System.EventHandler(this.saveTest_Click);
             // 
             // addRightAnswer
             // 
@@ -161,7 +159,7 @@ namespace MazayTests.Manager
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.addAnswer);
             this.Controls.Add(this.addRightAnswer);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.saveTest);
             this.Controls.Add(this.addQuestion);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -174,7 +172,6 @@ namespace MazayTests.Manager
             this.Name = "CreatorTestForm";
             this.Text = "CreatorTestForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreatorTestForm_FormClosed);
-            this.Load += new System.EventHandler(this.CreatorTestForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,7 +188,7 @@ namespace MazayTests.Manager
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button addQuestion;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button saveTest;
         private System.Windows.Forms.Button addRightAnswer;
         private System.Windows.Forms.Button addAnswer;
     }
