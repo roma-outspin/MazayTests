@@ -44,8 +44,8 @@ namespace MazayTests.Manager
             // 
             // Start
             // 
-            this.Start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.Start.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Start.Location = new System.Drawing.Point(268, 203);
             this.Start.Name = "Start";
@@ -64,6 +64,7 @@ namespace MazayTests.Manager
             this.Controls.Add(this.label1);
             this.Name = "StartForm";
             this.Text = "StartForm";
+            this.Load += new System.EventHandler(this.StartForm_Load);
             this.ResumeLayout(false);
 
         }

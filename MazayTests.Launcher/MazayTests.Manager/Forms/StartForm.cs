@@ -19,7 +19,7 @@ namespace MazayTests.Manager
         {
             InitializeComponent();
         }
-        // Метод заглушка
+        
         private void Start_Click(object sender, EventArgs e)
         {
             if (!Directory.Exists("Tests"))
@@ -28,6 +28,11 @@ namespace MazayTests.Manager
                 managerTests.ShowCreatorTest();
             }
             Hide();
+        }
+
+        private void StartForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,9 +1,10 @@
 ﻿
 using MazayTests.Core;
-using Microsoft.VisualBasic;
 using System;
 using System.IO;
 using System.Windows.Forms;
+
+
 
 
 namespace MazayTests.Manager
@@ -11,21 +12,19 @@ namespace MazayTests.Manager
     public partial class ManagerTestsForm : Form
     {
         string[] _testCollections;
-        string _currentCollection;
+        public string _currentCollection;
         string _currentTest;
-
-        AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+        DialogNameForm dialogName;
+      
+        
         public ManagerTestsForm()
         {
             InitializeComponent();
             _testCollections = Directory.GetDirectories("Tests");
             _currentCollection = _testCollections[0];
             ShowCollections(_testCollections);
-            coll.AddRange(_testCollections);
-            
+            dialogName = new DialogNameForm();
         }
-        public string PathToTest;
-        public string NameTest;
 
         private void ShowCollections(string[] collectionPathes)
         {
@@ -75,9 +74,6 @@ namespace MazayTests.Manager
 
         private void GetTests(string name)
         {
-            Label test = new();
-            test.Text = name;
-            test.AutoSize = true;
             testsPanel.Items.Add(new ListViewItem(name));
             testsPanel.Click += SelectTest;
             testsPanel.DoubleClick += OpenTest;
@@ -85,14 +81,27 @@ namespace MazayTests.Manager
 
         private void OpenTest(object sender, EventArgs e)
         {
-            if (_currentTest == string.Empty)
+            if (_currentTest == null || _currentTest == string.Empty)
             {
                 MessageBox.Show("Выберите тест для запуска");
             }
             else
             {
-                var test = new TestBuilder().OpenTest(_currentTest);
-                MessageBox.Show(test.Name);
+                DialogResult result = MessageBox.Show("Настроить параметры запускаемого теста? \n" +
+                    "Чтобы запустить тест c настройками по умолчанию нажмите 'нет'", "Сообщение",
+                         MessageBoxButtons.YesNoCancel,
+                         MessageBoxIcon.Information,
+                         MessageBoxDefaultButton.Button1,
+                         MessageBoxOptions.DefaultDesktopOnly);
+                if (result == DialogResult.Yes)
+                {
+                    new SetUpTestForm().Show();
+                    Hide();
+                }
+                if (result == DialogResult.No)
+                {
+                    new RunTestForm(_currentTest).Show();
+                }
             }
         }
 
@@ -103,7 +112,7 @@ namespace MazayTests.Manager
 
         private void ManagerTestsForm_Load(object sender, EventArgs e)
         {
-            autoCompleteData();
+            
         }
 
         private void ManagerTestsForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -215,11 +224,10 @@ namespace MazayTests.Manager
 
         public void ShowCreatorTest()
         {
-            NameTest = Interaction.InputBox("Введите название нового теста:");
-            PathToTest = $"{_currentCollection}\\{NameTest}.json";
-            if (!File.Exists(PathToTest) && NameTest != string.Empty)
+            dialogName.ShowDialog();
+            if (!File.Exists(GetPath()) && dialogName.newName != string.Empty)
             {
-                new CreatorTestForm().Show();
+                new CreatorTestForm(dialogName.newName, GetPath()).Show();
                 Hide();
             }
             else MessageBox.Show("Тест не будет создан! \n Возможные причины\n" +
@@ -227,12 +235,15 @@ namespace MazayTests.Manager
                 "-Не введен текст\n" +
                 "-Тест с таким именем уже существует");
         }
-
+        public string GetPath()
+        {
+           return $"{_currentCollection}\\{dialogName.newName}.json";
+        }
         private void CreateCollection()
         {
-            string title = Interaction.InputBox("Введите название новой коллекции:");
-            string path = $"Tests\\{title}";
-            if (!Directory.Exists($"{path}") && title != string.Empty)
+            dialogName.ShowDialog(); 
+            string path = $"Tests\\{dialogName.newName}";
+            if (!Directory.Exists($"{path}"))
             {
                 _currentCollection = Directory.CreateDirectory($"{path}").FullName;
                 UpdateCollections();
@@ -245,12 +256,6 @@ namespace MazayTests.Manager
                 "-Не введен текст\n" +
                 "-Коллекция с таким именем уже существует");
             }
-        }
-
-        private void autoCompleteData()
-        {
-            searchBox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            searchBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
         }
     }
 }

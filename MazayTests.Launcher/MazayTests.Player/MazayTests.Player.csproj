@@ -3,20 +3,16 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MazayTests.Core\MazayTests.Core.csproj" />
-    <ProjectReference Include="..\MazayTests.Player\MazayTests.Player.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\ManagerTestsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Update="Forms\StartForm.cs">
+    <Compile Update="RunTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

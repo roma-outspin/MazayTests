@@ -120,7 +120,7 @@ namespace MazayTests.Manager
             this.addQuestion.TabIndex = 11;
             this.addQuestion.Text = "Добавить вопрос";
             this.addQuestion.UseVisualStyleBackColor = true;
-            this.addQuestion.Click += new System.EventHandler(this.addQuestion_Click);
+            this.addQuestion.Click += new System.EventHandler(this.AddQuestion_Click);
             // 
             // saveTest
             // 
@@ -130,7 +130,7 @@ namespace MazayTests.Manager
             this.saveTest.TabIndex = 12;
             this.saveTest.Text = "Сохранить тест";
             this.saveTest.UseVisualStyleBackColor = true;
-            this.saveTest.Click += new System.EventHandler(this.saveTest_Click);
+            this.saveTest.Click += new System.EventHandler(this.SaveTest_Click);
             // 
             // addRightAnswer
             // 
@@ -140,7 +140,7 @@ namespace MazayTests.Manager
             this.addRightAnswer.TabIndex = 13;
             this.addRightAnswer.Text = "Добавить ответ";
             this.addRightAnswer.UseVisualStyleBackColor = true;
-            this.addRightAnswer.Click += new System.EventHandler(this.addRightAnswer_Click);
+            this.addRightAnswer.Click += new System.EventHandler(this.AddRightAnswer_Click);
             // 
             // addAnswer
             // 
@@ -150,7 +150,7 @@ namespace MazayTests.Manager
             this.addAnswer.TabIndex = 14;
             this.addAnswer.Text = "Добавить ответ";
             this.addAnswer.UseVisualStyleBackColor = true;
-            this.addAnswer.Click += new System.EventHandler(this.addAnswer_Click);
+            this.addAnswer.Click += new System.EventHandler(this.AddAnswer_Click);
             // 
             // CreatorTestForm
             // 
@@ -172,6 +172,7 @@ namespace MazayTests.Manager
             this.Name = "CreatorTestForm";
             this.Text = "CreatorTestForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreatorTestForm_FormClosed);
+            this.Load += new System.EventHandler(this.CreatorTestForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
