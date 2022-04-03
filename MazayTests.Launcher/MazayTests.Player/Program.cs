@@ -1,3 +1,4 @@
+using MazayTests.Core;
 using MazayTests.Manager;
 using System;
 using System.Collections.Generic;
@@ -13,12 +14,20 @@ namespace MazayTests.Player
         ///  The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-           // Application.Run(new RunTestForm(Interactive));
+            // Application.Run(new RunTestForm(Interactive));
+            string path = "";
+
+            if (args.Length>0)
+            {
+                path = args[0];
+            }
+            //Application.Run(new OpenFileDialog());
+            Application.Run(new MainForm(new TestBuilder().OpenTest(path)));
         }
     }
 }

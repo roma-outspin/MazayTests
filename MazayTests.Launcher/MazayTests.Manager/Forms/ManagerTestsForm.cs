@@ -1,6 +1,7 @@
 ﻿
 using MazayTests.Core;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
@@ -100,7 +101,17 @@ namespace MazayTests.Manager
                 }
                 if (result == DialogResult.No)
                 {
-                    new RunTestForm(_currentTest).Show();
+                    //new RunTestForm(_currentTest).Show();
+                    Process _process = new Process();
+
+                    ProcessStartInfo startInfo = new ProcessStartInfo();
+
+
+                    startInfo.FileName = "MazayTests.Player.exe";
+                    startInfo.Arguments = _currentTest;
+
+                    _process.StartInfo = startInfo;
+                    _process.Start();
                 }
             }
         }
