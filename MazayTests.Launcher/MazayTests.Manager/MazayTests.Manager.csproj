@@ -9,13 +9,14 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MazayTests.Core\MazayTests.Core.csproj" />
+    <ProjectReference Include="..\MazayTests.Player\MazayTests.Player.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ManagerTestsForm.cs">
+    <Compile Update="Forms\ManagerTestsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="StartForm.cs">
+    <Compile Update="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

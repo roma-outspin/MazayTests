@@ -1,11 +1,12 @@
+using MazayTests.Core;
+using MazayTests.Manager;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MazayTests.Manager
+namespace MazayTests.Player
 {
     static class Program
     {
@@ -18,14 +19,15 @@ namespace MazayTests.Manager
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (Directory.Exists("Tests"))
+            // Application.Run(new RunTestForm(Interactive));
+            string path = "";
+
+            if (args.Length>0)
             {
-                Application.Run(new ManagerTestsForm());
+                path = args[0];
             }
-            else
-            {
-                Application.Run(new StartForm());
-            }
+            //Application.Run(new OpenFileDialog());
+            Application.Run(new MainForm(new TestBuilder().OpenTest(path)));
         }
     }
 }
