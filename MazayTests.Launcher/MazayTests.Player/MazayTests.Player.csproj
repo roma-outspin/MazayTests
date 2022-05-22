@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Downloads\customscrollbar_src\CustomControls\CustomControls.csproj" />
     <ProjectReference Include="..\MazayTests.Core\MazayTests.Core.csproj" />
   </ItemGroup>
 
@@ -17,8 +18,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Update="RunTestForm.cs">
-      <SubType>Form</SubType>
+    <Compile Update="RJTogleButton.cs">
+      <SubType>Component</SubType>
     </Compile>
   </ItemGroup>
 

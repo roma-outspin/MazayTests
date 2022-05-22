@@ -1,9 +1,5 @@
 using MazayTests.Core;
-using MazayTests.Manager;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MazayTests.Player
@@ -19,10 +15,10 @@ namespace MazayTests.Player
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            // Application.Run(new RunTestForm(Interactive));
+            //Application.Run(new RunTestForm(Interactive));
             string path = "";
 
-            if (args.Length>0)
+            if (args.Length > 0)
             {
                 path = args[0];
             }

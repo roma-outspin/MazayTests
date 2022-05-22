@@ -12,7 +12,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazayTests.Manager", "Mazay
 		{69B7A4F3-B8D3-475F-9D03-F63D810F90DB} = {69B7A4F3-B8D3-475F-9D03-F63D810F90DB}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MazayTests.Player", "MazayTests.Player\MazayTests.Player.csproj", "{B845AF92-1098-4E48-829A-0EC37F458B2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MazayTests.Player", "MazayTests.Player\MazayTests.Player.csproj", "{B845AF92-1098-4E48-829A-0EC37F458B2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomControls", "..\..\..\Downloads\customscrollbar_src\CustomControls\CustomControls.csproj", "{5B85E2D7-2005-4496-B5D7-59C68A1EC91D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{B845AF92-1098-4E48-829A-0EC37F458B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B845AF92-1098-4E48-829A-0EC37F458B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B845AF92-1098-4E48-829A-0EC37F458B2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B85E2D7-2005-4496-B5D7-59C68A1EC91D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B85E2D7-2005-4496-B5D7-59C68A1EC91D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B85E2D7-2005-4496-B5D7-59C68A1EC91D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B85E2D7-2005-4496-B5D7-59C68A1EC91D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

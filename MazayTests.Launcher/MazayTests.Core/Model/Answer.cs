@@ -1,5 +1,8 @@
-﻿namespace MazayTests.Core.Model
+﻿using System;
+
+namespace MazayTests.Core.Model
 {
+    [Serializable]
     public class Answer
     {
         public string Text { get; set; }

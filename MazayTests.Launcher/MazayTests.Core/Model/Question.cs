@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace MazayTests.Core.Model
 {
+    [Serializable]
     public class Question
     {
         public Guid GuidQuestion { get; set; }

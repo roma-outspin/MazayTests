@@ -8,7 +8,6 @@ namespace MazayTests.Core.Model
 {
     public class LaunchProperties
     {
-        
         public TimeSpan Timer { get; set; }
         public bool withNextButton { get; set; }
         public bool withBackButton { get; set; }
@@ -18,6 +17,5 @@ namespace MazayTests.Core.Model
         public List<Question> SelectedQuestions { get; set; }
 
         private CustomMode _customMode;
-
     }
 }

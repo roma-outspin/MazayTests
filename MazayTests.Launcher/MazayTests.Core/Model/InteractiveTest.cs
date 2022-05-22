@@ -8,7 +8,8 @@ namespace MazayTests.Core.Model
 {
     public class InteractiveTest
     {
-        public String Name { get; set; }
+        //public Guid
+        public string Name { get; set; }
         public List<Question> Questions { get; set; }
         public LaunchProperties StartProperties { get; set; }
         public List<string> Sounds { get; set; }
