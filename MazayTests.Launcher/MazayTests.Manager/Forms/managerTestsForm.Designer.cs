@@ -33,7 +33,7 @@ namespace MazayTests.Manager
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.TestScrollbar = new CustomControls.CustomScrollbar();
+            this.TestScrollbar = new MazayTests.Manager.CustomScrollbar();
             this.MenuPanel = new System.Windows.Forms.TableLayoutPanel();
             this.DeleteTestButton = new System.Windows.Forms.Button();
             this.Start = new System.Windows.Forms.Button();
@@ -45,7 +45,7 @@ namespace MazayTests.Manager
             this.Search = new System.Windows.Forms.Button();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
             this.BasisCollectionPanel = new System.Windows.Forms.Panel();
-            this.CollectionScrollbar = new CustomControls.CustomScrollbar();
+            this.CollectionScrollbar = new MazayTests.Manager.CustomScrollbar();
             this.CollectionTable = new System.Windows.Forms.TableLayoutPanel();
             this.ButtonConrolsPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.AddBut = new System.Windows.Forms.Button();
@@ -386,7 +386,7 @@ namespace MazayTests.Manager
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private CustomControls.CustomScrollbar TestScrollbar;
+        private MazayTests.Manager.CustomScrollbar TestScrollbar;
         private System.Windows.Forms.TableLayoutPanel TestTable;
         private System.Windows.Forms.TableLayoutPanel MenuPanel;
         private System.Windows.Forms.Button DeleteTestButton;
@@ -395,7 +395,7 @@ namespace MazayTests.Manager
         private System.Windows.Forms.Button CancelMenu;
         private System.Windows.Forms.TableLayoutPanel CollectionTable;
         private System.Windows.Forms.Panel BasisCollectionPanel;
-        private CustomControls.CustomScrollbar CollectionScrollbar;
+        private MazayTests.Manager.CustomScrollbar CollectionScrollbar;
         private System.Windows.Forms.FlowLayoutPanel SearchPanel;
         private System.Windows.Forms.Button Search;
         private System.Windows.Forms.TextBox SearchTextBox;

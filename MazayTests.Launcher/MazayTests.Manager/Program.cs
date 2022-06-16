@@ -18,7 +18,7 @@ namespace MazayTests.Manager
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            if (Directory.Exists("Tests"))
+            if (Directory.Exists("Tests") && Directory.GetDirectories("Tests").Length > 0)
             {
                 Application.Run(new ManagerTestsForm());
             }

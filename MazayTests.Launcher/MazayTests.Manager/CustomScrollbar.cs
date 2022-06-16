@@ -9,7 +9,8 @@ using System.Windows.Forms.Design;
 using System.Diagnostics;
 using MazayTests.Manager;
 
-namespace CustomControls {
+namespace MazayTests.Manager
+{
 
     [Designer(typeof(ScrollbarControlDesigner))]
     public class CustomScrollbar : UserControl
