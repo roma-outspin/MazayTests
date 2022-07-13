@@ -172,7 +172,6 @@ namespace MazayTests.Manager
             this.Name = "CreatorTestForm";
             this.Text = "CreatorTestForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.CreatorTestForm_FormClosed);
-            this.Load += new System.EventHandler(this.CreatorTestForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

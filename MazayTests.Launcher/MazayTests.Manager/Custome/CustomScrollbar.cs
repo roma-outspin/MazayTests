@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.Design;
 using System.Diagnostics;
 using MazayTests.Manager;
+using MazayTests.Manager.Custome;
 
 namespace MazayTests.Manager
 {

@@ -42,7 +42,6 @@ namespace MazayTests.Manager
 
         private void CreatorTestForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            new ManagerTestsForm().Show();
             Hide();
         }
 
@@ -65,20 +64,13 @@ namespace MazayTests.Manager
             questions.Add(generator.GetQuestion(questionTextBox.Text, rightAnswers, answers));
             new CreatorTestForm(newName, pathToTest, questions).Show();
             Hide();
-
         }
 
         private void SaveTest_Click(object sender, EventArgs e)
         {
             var test = new TestGenerator().GetTest(newName, questions);
             new TestBuilder().SaveTest(test, pathToTest);
-            new ManagerTestsForm().Show();
             Hide();
-        }
-
-        private void CreatorTestForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

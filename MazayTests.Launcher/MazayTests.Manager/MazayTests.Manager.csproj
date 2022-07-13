@@ -13,14 +13,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="CustomScrollbar.cs" />
+    <Compile Update="Custome\CustomScrollbar.cs" />
     <Compile Update="Forms\ManagerTestsForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\StartForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Resource.Designer.cs">
+    <Compile Update="Custome\Resource.Designer.cs">
       <DependentUpon>Resource.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -32,11 +32,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="CustomScrollbar.resx">
+    <EmbeddedResource Update="Custome\CustomScrollbar.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CustomScrollbar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resource.resx">
+    <EmbeddedResource Update="Custome\Resource.resx">
       <SubType>Designer</SubType>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>

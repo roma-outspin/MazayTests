@@ -73,13 +73,13 @@ namespace MazayTests.Manager
             this.TestScrollbar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.TestScrollbar.DownArrowImage = ((System.Drawing.Image)(resources.GetObject("TestScrollbar.DownArrowImage")));
             this.TestScrollbar.LargeChange = 5;
-            this.TestScrollbar.Location = new System.Drawing.Point(1119, 3);
+            this.TestScrollbar.Location = new System.Drawing.Point(1112, 0);
             this.TestScrollbar.Margin = new System.Windows.Forms.Padding(0);
             this.TestScrollbar.Maximum = 100;
             this.TestScrollbar.Minimum = 0;
-            this.TestScrollbar.MinimumSize = new System.Drawing.Size(20, 92);
+            this.TestScrollbar.MinimumSize = new System.Drawing.Size(22, 561);
             this.TestScrollbar.Name = "TestScrollbar";
-            this.TestScrollbar.Size = new System.Drawing.Size(20, 555);
+            this.TestScrollbar.Size = new System.Drawing.Size(22, 561);
             this.TestScrollbar.SmallChange = 1;
             this.TestScrollbar.TabIndex = 20;
             this.TestScrollbar.ThumbMiddleImage = ((System.Drawing.Image)(resources.GetObject("TestScrollbar.ThumbMiddleImage")));
@@ -108,8 +108,8 @@ namespace MazayTests.Manager
             this.MenuPanel.Margin = new System.Windows.Forms.Padding(10);
             this.MenuPanel.Name = "MenuPanel";
             this.MenuPanel.RowCount = 1;
-            this.MenuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 245F));
-            this.MenuPanel.Size = new System.Drawing.Size(735, 221);
+            this.MenuPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 281F));
+            this.MenuPanel.Size = new System.Drawing.Size(728, 221);
             this.MenuPanel.TabIndex = 16;
             this.MenuPanel.Visible = false;
             // 
@@ -128,7 +128,7 @@ namespace MazayTests.Manager
             this.DeleteTestButton.Location = new System.Drawing.Point(1, 1);
             this.DeleteTestButton.Margin = new System.Windows.Forms.Padding(0);
             this.DeleteTestButton.Name = "DeleteTestButton";
-            this.DeleteTestButton.Size = new System.Drawing.Size(182, 245);
+            this.DeleteTestButton.Size = new System.Drawing.Size(180, 281);
             this.DeleteTestButton.TabIndex = 10;
             this.DeleteTestButton.Text = "-";
             this.DeleteTestButton.UseVisualStyleBackColor = false;
@@ -144,10 +144,10 @@ namespace MazayTests.Manager
             this.Start.Font = new System.Drawing.Font("Segoe UI", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
             this.Start.ForeColor = System.Drawing.Color.AliceBlue;
             this.Start.Image = ((System.Drawing.Image)(resources.GetObject("Start.Image")));
-            this.Start.Location = new System.Drawing.Point(184, 1);
+            this.Start.Location = new System.Drawing.Point(182, 1);
             this.Start.Margin = new System.Windows.Forms.Padding(0);
             this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(182, 245);
+            this.Start.Size = new System.Drawing.Size(180, 281);
             this.Start.TabIndex = 9;
             this.Start.UseVisualStyleBackColor = false;
             this.Start.Click += new System.EventHandler(this.OpenTest);
@@ -160,10 +160,10 @@ namespace MazayTests.Manager
             this.Settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Settings.ForeColor = System.Drawing.Color.White;
             this.Settings.Image = ((System.Drawing.Image)(resources.GetObject("Settings.Image")));
-            this.Settings.Location = new System.Drawing.Point(367, 1);
+            this.Settings.Location = new System.Drawing.Point(363, 1);
             this.Settings.Margin = new System.Windows.Forms.Padding(0);
             this.Settings.Name = "Settings";
-            this.Settings.Size = new System.Drawing.Size(182, 245);
+            this.Settings.Size = new System.Drawing.Size(180, 281);
             this.Settings.TabIndex = 1;
             this.Settings.UseVisualStyleBackColor = false;
             // 
@@ -174,10 +174,10 @@ namespace MazayTests.Manager
             this.CancelMenu.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.CancelMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CancelMenu.ForeColor = System.Drawing.Color.Black;
-            this.CancelMenu.Location = new System.Drawing.Point(550, 1);
+            this.CancelMenu.Location = new System.Drawing.Point(544, 1);
             this.CancelMenu.Margin = new System.Windows.Forms.Padding(0);
             this.CancelMenu.Name = "CancelMenu";
-            this.CancelMenu.Size = new System.Drawing.Size(184, 245);
+            this.CancelMenu.Size = new System.Drawing.Size(183, 281);
             this.CancelMenu.TabIndex = 11;
             this.CancelMenu.Text = "X";
             this.CancelMenu.UseVisualStyleBackColor = true;
@@ -187,15 +187,16 @@ namespace MazayTests.Manager
             // 
             this.TestTable.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.TestTable.ColumnCount = 1;
-            this.TestTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TestTable.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.TestTable.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TestTable.ForeColor = System.Drawing.Color.White;
             this.TestTable.Location = new System.Drawing.Point(317, 0);
             this.TestTable.Margin = new System.Windows.Forms.Padding(0);
+            this.TestTable.MinimumSize = new System.Drawing.Size(795, 561);
             this.TestTable.Name = "TestTable";
             this.TestTable.RowCount = 1;
-            this.TestTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TestTable.Size = new System.Drawing.Size(824, 561);
+            this.TestTable.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.TestTable.Size = new System.Drawing.Size(817, 561);
             this.TestTable.TabIndex = 18;
             // 
             // LogoLable
@@ -326,7 +327,7 @@ namespace MazayTests.Manager
             this.AddBut.Size = new System.Drawing.Size(33, 33);
             this.AddBut.TabIndex = 0;
             this.AddBut.UseVisualStyleBackColor = false;
-            this.AddBut.Click += new System.EventHandler(this.Add_Click);
+            this.AddBut.Click += new System.EventHandler(this.AddCollection_Click);
             // 
             // DeleteBut
             // 
@@ -349,14 +350,14 @@ namespace MazayTests.Manager
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1141, 561);
+            this.ClientSize = new System.Drawing.Size(1134, 561);
             this.Controls.Add(this.TestScrollbar);
             this.Controls.Add(this.TestTable);
             this.Controls.Add(this.CollectionTable);
             this.Controls.Add(this.MenuPanel);
             this.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.MinimumSize = new System.Drawing.Size(1150, 600);
             this.Name = "ManagerTestsForm";
             this.Text = "ManagerTestsForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.ManagerTestsForm_FormClosed);

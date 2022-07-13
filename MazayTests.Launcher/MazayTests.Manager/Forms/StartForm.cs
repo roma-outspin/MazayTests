@@ -14,14 +14,12 @@ namespace MazayTests.Manager
 {
     public partial class StartForm : Form
     {
-        DialogNameForm dialogName;
-       // CreatorTestForm creatorTest;
         string pathTest;
-        //ManagerTestsForm managerTests = new();
+        
         public StartForm()
         {
             InitializeComponent();
-            dialogName = new();
+           
         }
         
         private void Start_Click(object sender, EventArgs e)
@@ -35,46 +33,64 @@ namespace MazayTests.Manager
             {
                 CreateCollection();
             }
-            Hide();
+            //Hide();
         }
-        public void ShowCreatorTest()
-        {
-            dialogName.ShowDialog();
-            if (!File.Exists(GetPath()) && dialogName.newName != string.Empty)
-            {
-                new CreatorTestForm(dialogName.newName, GetPath()).Show();
-                Hide();
-            }
-            else MessageBox.Show("Тест не будет создан! \n Возможные причины\n" +
-                "-Нажата кнопкка отмены\n" +
-                "-Не введен текст\n" +
-                "-Тест с таким именем уже существует");
-        }
-        public string GetPath()
-        {
-            return $"{pathTest}\\{dialogName.newName}.json";
-        }
+        //public void ShowCreatorTest()
+        //{
+        //    DialogNameForm dialogName = new();
+        //    Label label1 = new();
+        //    label1.Text = "Введите название теста";
+        //    label1.AutoSize = true;
+        //    label1.Location = new System.Drawing.Point(250, 100);
+        //    label1.Anchor = System.Windows.Forms.AnchorStyles.None;
+        //    label1.Font = new System.Drawing.Font("Comfortaa Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+        //    label1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+        //    dialogName.Controls.Add(label1);
+        //    dialogName.ShowDialog();
+        //    if (!File.Exists($"{pathTest}\\{dialogName.newName}.json") && dialogName.newName != string.Empty)
+        //    {
+        //        new CreatorTestForm(dialogName.newName, $"{pathTest}\\{dialogName.newName}.json").Show();
+               
+        //    }
+        //    else MessageBox.Show("Тест не будет создан! \n Возможные причины\n" +
+        //        "-Нажата кнопкка отмены\n" +
+        //        "-Не введен текст\n" +
+        //        "-Тест с таким именем уже существует");
+
+        //}
+
         private void CreateCollection()
         {
+            DialogNameForm dialogName = new();
+            Label label1 = new();
+            label1.Location = new System.Drawing.Point(30, 100);
+            label1.Text = "Введите название колекции в которой будут хранится тесты";
+            label1.AutoSize = true;
+            label1.Anchor =  System.Windows.Forms.AnchorStyles.None;
+            label1.Font = new System.Drawing.Font("Comfortaa Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            label1.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            dialogName.Controls.Add(label1);
             dialogName.ShowDialog();
             string path = $"Tests\\{dialogName.newName}";
             if (!Directory.Exists($"{path}"))
             {
                 pathTest = Directory.CreateDirectory($"{path}").FullName;
-                ShowCreatorTest();
+                // ShowCreatorTest();
+                MessageBox.Show("Коллекция созданна, наполните ее тестами");
+                Hide();
+                new ManagerTestsForm().Show();
             }
             else
             {
                 MessageBox.Show("Коллекция не будет создана! \n Возможные причины\n" +
                 "-Нажата кнопкка отмены\n" +
                 "-Не введен текст\n" +
-                "-Коллекция с таким именем уже существует");
+                "-Коллекция с таким именем уже существует"); 
             }
         }
-
-        private void StartForm_Load(object sender, EventArgs e)
+        private void StartForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-
+            Application.Exit();
         }
     }
 }
