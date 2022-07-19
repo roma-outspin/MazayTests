@@ -12,9 +12,11 @@ namespace MazayTests.Manager
         string[] _testCollections;
         public string _currentCollection;
         string _currentTest;
+       // private object currentButton = null;
         TableLayoutPanel _collectionPanel;
         FlowLayoutPanel _testPanel;
         Repository Repo;
+
 
         public ManagerTestsForm()
         {
@@ -24,7 +26,7 @@ namespace MazayTests.Manager
             _currentCollection = _testCollections[0];
             PaintManager();
             ShowCollection(_testCollections);
-            ShowTests(Repo.GetTests(_currentCollection));   
+            ShowTests(Repo.GetTests(_currentCollection));
         }
         private void PaintManager()
         {
@@ -79,9 +81,24 @@ namespace MazayTests.Manager
                 else button.BackColor = System.Drawing.Color.White;
 
                 button.Click += Collection_Click;
+                button.DragEnter += Collection_DragEnter;
+                button.DragDrop += Collection_DragDrop;
                 _collectionPanel.Controls.Add(button);
                 CheckCollectionScrollbar(Repo.GetCollections());
             }
+        }
+
+        private void Collection_DragDrop(object sender, DragEventArgs e)
+        {
+            _currentCollection = "Tests" + "\\" + ((Button)sender).Text;
+            
+            File.Move(_currentTest, _currentCollection + "\\" + Repo.GetNameTest(_currentTest));
+            UpdateForm();
+        }
+
+        private void Collection_DragEnter(object sender, DragEventArgs e)
+        {
+                e.Effect = DragDropEffects.Move;
         }
 
         private void _collectionPanel_MouseWheel(object? sender, MouseEventArgs e)
@@ -91,7 +108,7 @@ namespace MazayTests.Manager
 
         private Button AddButton(string text)
         {
-            var button = new  Button()
+            var button = new Button()
             {
                 Text = text,
                 FlatStyle = FlatStyle.Flat,
@@ -99,7 +116,8 @@ namespace MazayTests.Manager
                 Dock = DockStyle.Fill,
                 Font = new System.Drawing.Font("Comfortaa Medium", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point),
                 ForeColor = System.Drawing.SystemColors.AppWorkspace,
-                Margin = new Padding(0, 0, 0, 0)
+                Margin = new Padding(0, 0, 0, 0),
+                AllowDrop = true
             };
             button.FlatAppearance.BorderColor = System.Drawing.Color.White;
             return button;
@@ -117,7 +135,9 @@ namespace MazayTests.Manager
                 Size = new System.Drawing.Size(180, 180),
                 Font = new System.Drawing.Font("Exo 2 SemiBold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold))), System.Drawing.GraphicsUnit.Point),
                 ForeColor = System.Drawing.Color.AliceBlue,
-                Margin = new Padding(30, 30, 30, 30)         
+                Margin = new Padding(30, 30, 30, 30),
+                Anchor = AnchorStyles.None
+                
             };
             return rjButton;
         }
@@ -194,11 +214,18 @@ namespace MazayTests.Manager
                 FileInfo fileInfo = new FileInfo(tests[i]);
                 var button = CreateButtonTest(fileInfo.Name.Substring(0, fileInfo.Name.LastIndexOf('.')));
                 button.Click += Test_Click;
+                button.MouseDown += Test_MouseDown; 
                 _testPanel.Controls.Add(button);
                 height += button.Size.Height;
             }
             TestTable.Controls.Add(_testPanel);
             CheckTestScrollbar();
+        }
+
+        private void Test_MouseDown(object? sender, MouseEventArgs e)
+        {
+            _currentTest = _currentCollection + "\\" + ((Button)sender).Text + ".json";
+            ((RJButton)sender).DoDragDrop((DataFormats.FileDrop), DragDropEffects.Move);
         }
 
         private void Test_MouseWheel(object? sender, MouseEventArgs e)
@@ -239,6 +266,7 @@ namespace MazayTests.Manager
 
         private void Test_Click(object sender, EventArgs e)
         {
+            //currentButton = sender;
             MenuPanel.Visible = true;
             MenuPanel.BringToFront();
             _testPanel.Enabled = false;
@@ -343,7 +371,7 @@ namespace MazayTests.Manager
             {
                 Repo.CreateCollection(path);
                 _currentCollection = path;
-                ShowCollection(Repo.GetCollections());
+                UpdateForm();
             }
             else
             {
@@ -360,5 +388,6 @@ namespace MazayTests.Manager
             MenuPanel.SendToBack();
             _testPanel.Enabled = true;
         }
+        
     }
 }
