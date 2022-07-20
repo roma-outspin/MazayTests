@@ -25,8 +25,7 @@ namespace MazayTests.Manager
             else
             {
                 Application.Run(new StartForm());
-            }
-            //Application.Run(new Form1());
+            }  
         }
     }
 }
